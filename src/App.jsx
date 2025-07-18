@@ -4,15 +4,23 @@ import Input from './components/input/Input.jsx';
 import Loader from './components/loader/Loader.jsx';
 import Image from './components/image/Image.jsx';
 import Footer from './components/footer/Footer.jsx';
-
-import fs from "node:fs";
-import axios from "axios";
-import FormData from "form-data";
-
-const response = await axios.post('')
+import { useState } from 'react';
 
 
 function App() {
+
+  const [description, setDescription] = useState('');
+  const [image, setImage] = useState('');
+  const [isLoading, setIsLoading] = useState(null);
+  const [error, setError] = useState(null);
+
+
+  function onBtnSubmit () {
+    fetch('http://localhost:5000/generate-image')
+    .then(response => response.json())
+    .then(result)
+  }
+
 
   return (
     <>
