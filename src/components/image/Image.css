@@ -1,0 +1,24 @@
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem 0;
+}
+
+.image-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+
+.image-card:hover {
+  transform: scale(1.02);
+}
+
+.image-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}

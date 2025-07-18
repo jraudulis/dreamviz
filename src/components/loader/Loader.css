@@ -1,0 +1,25 @@
+.loader-container {
+  margin: 3rem auto;
+  text-align: center;
+}
+
+.dream-spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid rgba(255, 255, 255, 0.2);
+  border-top: 6px solid var(--accent);
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loader-container p {
+  font-size: 1rem;
+  color: var(--muted);
+}
