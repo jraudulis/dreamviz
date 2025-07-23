@@ -1,8 +1,8 @@
-function Image() {
+function Image({image}) {
     return (
     <div className="image-gallery container">
         <div className="image-card" >
-          <img src="" alt="" />
+          <img src={image} alt="generated image" />
         </div>
     </div>
     )

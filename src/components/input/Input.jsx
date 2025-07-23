@@ -1,17 +1,21 @@
 import './Input.css';
 import { useState } from 'react';
 
-function Input() {
+function Input({onBtnSubmit}) {
 
   const [input, setInput] = useState('');
 
     function onInputChange(event) {
     setInput(event.target.value);
-    console.log(input);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onBtnSubmit(input);
   }
     return (
     <div className="input-wrapper container">
-      <form>
+      <form onSubmit={handleSubmit}>
         <textarea value={input} onChange={onInputChange}
           className="dream-textarea"
           placeholder="Describe your dream..."

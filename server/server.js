@@ -13,6 +13,8 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/generate-image', async (req, res) => {
+  console.log(req.body);
+
   const { prompt } = req.body;
 
   if (!prompt) return res.status(400).json({ error: 'Prompt is required' });
@@ -21,6 +23,8 @@ app.post('/generate-image', async (req, res) => {
   form.append('prompt', prompt);
   form.append('output_format', 'webp');
 
+console.log('Full auth header:', `Bearer ${process.env.STABILITY_API_KEY}`);
+
   try {
     const response = await axios.post(
       'https://api.stability.ai/v2beta/stable-image/generate/ultra',
@@ -28,7 +32,7 @@ app.post('/generate-image', async (req, res) => {
       {
         headers: {
           ...form.getHeaders(),
-          Authorization: process.env.STABILITY_API_KEY,
+          Authorization: `Bearer ${process.env.STABILITY_API_KEY}`,
           Accept: 'image/*',
         },
         responseType: 'arraybuffer',

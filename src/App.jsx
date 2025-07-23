@@ -11,23 +11,37 @@ function App() {
 
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
-  const [isLoading, setIsLoading] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [input, setInput] = useState('');
   const [error, setError] = useState(null);
 
 
-  function onBtnSubmit () {
-    fetch('http://localhost:5000/generate-image')
-    .then(response => response.json())
-    .then(result)
+  async function onBtnSubmit(input) {
+  setIsLoading(true);
+  
+  try {
+    const response = await fetch('http://localhost:5000/generate-image', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({prompt: input})
+    });
+    
+    const result = await response.json();
+    setImage(result.image);
+    setIsLoading(false);
+  } catch (err) {
+    console.error('Fetch error:', err);
+    setIsLoading(false);
   }
+}
 
 
   return (
     <>
       <Header />
-      <Input />
+      <Input onBtnSubmit={onBtnSubmit} />
       <Loader />
-      <Image />
+      <Image image={image} />
       <Footer />
     </>
   )
