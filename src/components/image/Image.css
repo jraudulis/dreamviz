@@ -1,14 +1,11 @@
 .image-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  padding: 2rem 0;
+  /* width: 100%; */
+  text-align: center;
 }
 
 .image-card {
-  width: 300px;
-  height: auto;
-  position: relative;
+  width: 500px;
+  height: 500px;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 10px 20px rgba(0,0,0,0.3);
@@ -19,8 +16,18 @@
   transform: scale(1.02);
 }
 
-.image-card img {
-  width: 100%;
-  height: auto;
+.generated-image {
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
   display: block;
+}
+
+@media (max-width: 768px) {
+  .image-card {
+    width: 100%;
+    padding: 20px;
+    height: auto; /* or keep fixed height */
+  }
 }
