@@ -1,4 +1,4 @@
-import './image.css';
+import './Image.css';
 
 function Image({image}) {
 if (!image) return null;
