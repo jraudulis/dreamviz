@@ -1,4 +1,4 @@
-import './App.css'
+import './App.css';
 import Header from './components/header/Header.jsx';
 import History from './components/history/History.jsx';
 import Input from './components/input/Input.jsx';
