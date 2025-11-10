@@ -9,11 +9,12 @@ dotenv.config();
 const app = express();
 const PORT = 5000;
 
-app.use(cors());
+app.use(cors({
+  origin: "https://dreamviz.netlify.app/"
+}));
 app.use(express.json());
 
 app.post('/generate-image', async (req, res) => {
-  console.log(req.body);
 
   const { prompt } = req.body;
 

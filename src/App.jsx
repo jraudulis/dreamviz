@@ -21,7 +21,6 @@ function App() {
 
   function addToHistory(input, image){
     setHistory(history =>[{input, image}, ...history]);
-    console.log(history);
   }
 
   function handleDelete(itemToDelete, afterDeleteCallBack ) {
