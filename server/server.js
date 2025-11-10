@@ -10,7 +10,7 @@ const app = express();
 const PORT = 5000;
 
 app.use(cors({
-  origin: "https://dreamviz.netlify.app/"
+  origin: "https://dreamviz.netlify.app"
 }));
 app.use(express.json());
 
