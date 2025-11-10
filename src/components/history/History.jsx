@@ -1,5 +1,6 @@
 import './History.css';
 import { Link } from 'react-router-dom';
+import logo from '../../assets/logo.png';
 import { useState } from 'react';
 
 
@@ -15,7 +16,7 @@ function History({history, handleDelete, shareImage, downloadImage}) {
       <>
      <nav className='hist-nav'>
       <div className="logo-wrapper">
-          <img src="src/assets/logo.png" alt="" className="logo" />
+          <img src={logo} alt="logo" className="logo" />
         </div>
      <Link className="home-btn" to="/">Home</Link>
      </nav>
