@@ -1,0 +1,33 @@
+.success-message {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+
+  background-color: rgba(40, 167, 69, 0.12);
+  color: #2e7d32;
+  border: 1px solid rgba(40, 167, 69, 0.3);
+
+  padding: 0.9rem 1.4rem;
+  border-radius: 14px;
+  backdrop-filter: blur(8px);
+
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: center;
+
+  animation: slideFadeIn 0.3s ease-out;
+}
+
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -8px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}

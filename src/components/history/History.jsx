@@ -4,29 +4,27 @@ import logo from '../../assets/logo.png';
 import { useState } from 'react';
 
 
-function History({history, handleDelete, shareImage, downloadImage}) {
+function History({history, handleDeleteClick, shareImage, downloadImage}) {
 
   const [selectedImage, setSelectedImage] = useState(null);
 
-  function afterDeleteCallBack() {
-    setSelectedImage(null);
-  }
-
     return (
       <>
-     <nav className='hist-nav'>
+     {/* <nav className='hist-nav'>
       <div className="logo-wrapper">
-          <img src={logo} alt="logo" className="logo" />
-        </div>
-     <Link className="home-btn" to="/">Home</Link>
-     </nav>
+        <h2 className="logo">
+          DreamViz<span className="logo-span">.ai</span>
+        </h2>
+      </div>
+     <Link className="home-btn" to="/home">Home</Link>
+     </nav> */}
   <div className="history-wrapper">
     <h1>Your History</h1>
     <div className="history-list">
       {history.map((item, index) => (
         <div key={index} onClick={() => setSelectedImage(item)} className="history-card">
-          <img src={item.image} alt={item.input} className="history-image" />
-          <p className="history-prompt">{item.input}</p>
+          <img src={item.image} alt={item.prompt} className="history-image" />
+          <p className="history-prompt">{item.prompt}</p>
         </div>
       ))}
   </div>
@@ -39,12 +37,11 @@ function History({history, handleDelete, shareImage, downloadImage}) {
     <div className="btn-wrapper">
     <button onClick={() => downloadImage(selectedImage.image)}>Download</button>
     <button onClick={() => shareImage(selectedImage.image)}>Share</button>
-    {<button onClick={() =>handleDelete(selectedImage, afterDeleteCallBack)}>Delete</button>}
+    {<button onClick={() =>handleDeleteClick(selectedImage, setSelectedImage(null) )}>Delete</button>}
     <button onClick={() => setSelectedImage(null)}>Close</button>
     </div>
   </div>
 )}
-
 
     </>
     )

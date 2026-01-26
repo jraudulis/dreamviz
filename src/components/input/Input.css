@@ -11,24 +11,31 @@ textarea {
   margin-bottom: 1rem;
   padding: 1rem;
   font-size: 1rem;
-  border: none;
+  border: 1px solid #44475a;
   resize: vertical;
   outline: none;
-  background-color: #2b2d42;
-  color: var(--text);
+  background-color: #2a2b3c; /* match signin box background */
+  color: var(--text);        /* dark text like signin */
+}
+
+textarea:focus, input:focus {
+  border-color: var(--accent); /* highlight with accent on focus */
+  outline: none;
 }
 
 button {
   padding: 0.75rem 2rem;
   font-size: 1rem;
+  font-weight: 700;
   border: none;
   border-radius: 999px;
-  background-color: var(--accent);
+  background-color: var(--accent); /* purple accent from signin */
   color: white;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 button:hover {
-  background-color: #6c4fd0;
+  background-color: #6c4fd0; /* hover color stays as purple */
 }
+

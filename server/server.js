@@ -1,59 +1,51 @@
 import express from 'express';
-import axios from 'axios';
-import FormData from 'form-data';
-import dotenv from 'dotenv';
 import cors from 'cors';
+import bcrypt from 'bcryptjs';
+import knex from 'knex';
 
-dotenv.config();
+// import middlewear
+import authenticateJWT from './middlewear/authenticateJWT.js';
+
+// Import function controllers
+import handleRegister from './controllers/register.js';
+import handleSignin from './controllers/signin.js';
+import handleHistory from './controllers/history.js';
+import handleImageGeneration from './controllers/image.js';
+import handleDelete from './controllers/delete.js';
+import handleMeRequest from './controllers/me.js';
+
+// Database connection setup
+const db = knex({
+  client: 'pg',
+  connection: {
+    host: process.env.DATABASE_HOST,
+    port: 5432,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
+    database: process.env.DATABASE_DB
+  }
+});
+
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: "https://dreamviz.netlify.app"
+  origin: [
+    "http://localhost:5173",
+    "https://dreamviz.netlify.app"
+  ]
 }));
 app.use(express.json());
 
-app.post('/generate-image', async (req, res) => {
+app.post('/register',(req, res) => {handleRegister(req, res, db, bcrypt)});
+app.post('/signin', (req, res) => {handleSignin(req, res, db, bcrypt)});
+app.get('/history', authenticateJWT, (req, res) => {handleHistory(req, res, db)});
+app.get('/me', authenticateJWT, (req, res) => {handleMeRequest(req, res, db)});
+app.delete('/delete/:id', authenticateJWT, (req, res) => {handleDelete(req, res, db)});
+app.post('/generate-image', authenticateJWT, async (req, res) => {handleImageGeneration(req, res, db)});
 
-  const { prompt } = req.body;
 
-  if (!prompt) return res.status(400).json({ error: 'Prompt is required' });
-
-  const form = new FormData();
-  form.append('prompt', prompt);
-  form.append('output_format', 'webp');
-
-console.log('Full auth header:', `Bearer ${process.env.STABILITY_API_KEY}`);
-
-  try {
-    const response = await axios.post(
-      'https://api.stability.ai/v2beta/stable-image/generate/ultra',
-      form,
-      {
-        headers: {
-          ...form.getHeaders(),
-          Authorization: `Bearer ${process.env.STABILITY_API_KEY}`,
-          Accept: 'image/*',
-        },
-        responseType: 'arraybuffer',
-      }
-    );
-
-    const base64Image = Buffer.from(response.data).toString('base64');
-
-    res.json({ image: `data:image/webp;base64,${base64Image}` });
-  } catch (err) {
-    console.log('entered catch block');
-    console.error(err.response?.status, err.response?.data?.toString());
-    if (err.response?.status === 403){
-      console.log('Sending 403 response');
-      return res.status(403).json({error: 'Image generation failed due to our content policy'});
-    }
-     console.log('Sending 500 response');
-     res.status(500).json({error: 'Image generation failed'});
-  }
-});
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

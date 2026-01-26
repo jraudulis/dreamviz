@@ -1,4 +1,8 @@
 import './App.css';
+import  Signin from './components/signin/Signin.jsx';
+import  Register from './components/register/Register.jsx';
+import Nav from './components/navigation/Nav.jsx';
+import About from './components/about/About.jsx';
 import Header from './components/header/Header.jsx';
 import History from './components/history/History.jsx';
 import Input from './components/input/Input.jsx';
@@ -6,34 +10,134 @@ import Loader from './components/loader/Loader.jsx';
 import Image from './components/image/Image.jsx';
 import Footer from './components/footer/Footer.jsx';
 import ErrorMessage from './components/errormessage/ErrorMessage.jsx';
+import SuccessMessage from './components/successmessage/SuccessMessage.jsx';
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import ConfirmModal from './components/confirmModal/ConfirmModal.jsx';
 
 
 function App() {
 
-  const [description, setDescription] = useState('');
   const [history, setHistory] = useState([]);
   const [image, setImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [input, setInput] = useState('');
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [user, setUser] = useState(null);
+  const [confirmData, setConfirmData] = useState(null);
 
-  function addToHistory(input, image){
-    setHistory(history =>[{input, image}, ...history]);
-  }
+  const navigate = useNavigate();
 
-  function handleDelete(itemToDelete, afterDeleteCallBack ) {
-    if( confirm('Delete this item?') === true ){
-      setHistory(prevHistory => prevHistory.filter(item => item !==itemToDelete));
-      afterDeleteCallBack();
+  // Fetch request for user details on the page refresh
+  useEffect(()=> {
+
+    setIsLoading(true);
+
+    const fetchMe = async () => {
+      try {
+        const res = await fetch('https://dreamviz.onrender.com/me', {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+
+      if(!res.ok) {
+        setIsLoading(false);
+        return;
+      } 
+
+      const user = await res.json();
+      setUser(user);
+      setIsLoading(false);
+      navigate('/home');
+    } catch(err) {
+      setIsLoading(false);
+      console.log(err)
     }
-    
+  };
+
+    fetchMe();
+  }, []);
+
+// Clear error state if there is any error displayed for longer than 7s
+useEffect(()=> {
+  if (!error) return;
+
+  const timer = setTimeout(()=> setError(null), 5000);
+  return ()=> clearTimeout(timer);
+}, [error]);
+
+// Clear success message state if there is any messge displayed longer than 7s
+useEffect(()=> {
+  if(!successMessage) return;
+
+  const timer = setTimeout(()=> setSuccessMessage(null), 5000);
+  return ()=> clearTimeout(timer);
+}, [successMessage]);
+
+// fetch history data
+  const fetchHistory = async () => {
+
+    setIsLoading(true);
+
+    const res = await fetch('https://dreamviz.onrender.com/history', {
+      method: 'GET',
+      headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
+    });
+
+    if (!res.ok) {
+      setError('History request faield');
+      isLoading(false);
+      return;
+    }
+
+    const data = await res.json();
+    setHistory(data);
+    setIsLoading(false);
+  }
+  // Function to initiate delete modal and populate state with data
+  const handleDeleteClick = (image) => {
+    setConfirmData({
+      message: 'Delete this image?',
+      onConfirm: () => handleDelete(image)
+    });
+  };
+
+  // Fetch request to delete selected image data from database
+  const handleDelete = async (image) => {
+
+    try{
+
+      const res = await fetch(`https://dreamviz.onrender.com/delete/${image.id}`,{
+        method: 'delete',
+        headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
+      });
+
+      const data = await res.json();
+      setSuccessMessage('Image Deleted');
+      fetchHistory();
+
+    } catch(err) {
+      console.log('delete request error');
+    }     
   }
 
-  const base64ToUrl = (image) => {
+// Function for logging out user
+  const logout = () => {
+    localStorage.removeItem('token');
+    setUser(null);
+    navigate('/signin');
+  }
+// Function to convert base64 data in to file
+  const base64ToFile = (image) => {
+
       const base64String = image;
       const [metadata, data] = base64String.split(',');
+
+      const mimeType = metadata.match(/:(.*?);/)?.[1] || 'image/webp';
+      const extension = mimeType.split('/')[1];
 
       const binaryData = atob(data);
       
@@ -42,13 +146,13 @@ function App() {
         bytesData[i] = binaryData.charCodeAt(i);
       }
 
-      const blob = new Blob([bytesData], {type: 'image/png'});
-      return new File([blob], '.png', {type: 'image/png'});
+      const blob = new Blob([bytesData], {type: mimeType});
+      return new File([blob], `image.${extension}`, {type: mimeType});
     }
 
   async function shareImage(image) {
 
-    const file = base64ToUrl(image);
+    const file = base64ToFile(image);
 
    if(navigator.share)
     try {
@@ -58,42 +162,17 @@ function App() {
     }catch (err) {
       console.log(err);
     }
-    }
+  }
 
     const downloadImage = (image) => {
 
-      const blob = base64ToUrl(image);
-
       const dlink = document.createElement('a');
-      dlink.download = 'downloaded-image.png';
-      dlink.href = window.URL.createObjectURL(blob);
-      dlink.onclick = function(e) {
-        const that = this;
-        setTimeout(function(){
-          window.URL.revokeObjectURL(that.href);
-        }, 1500);
-      }
-
+      dlink.download = 'dreamviz image'
+      dlink.href = image;
       dlink.click();
-    }
+    };
 
-  useEffect(()=> {
-    if(history.length > 0) {
-      localStorage.setItem('History', JSON.stringify(history));
-    }
-  }, [history]);
-
-  useEffect(()=>{
-  try {
-    const savedHistory = JSON.parse(localStorage.getItem('History'));
-    if (savedHistory) {
-      setHistory(savedHistory);
-    }
-  } catch (error) {
-    console.error('Failed to load history from localStorage:', error);
-  }
-}, []);
-
+// Fetch image api
   async function onBtnSubmit(input) {
 
   setError(null);
@@ -102,8 +181,13 @@ function App() {
   try {
     const response = await fetch('https://dreamviz.onrender.com/generate-image', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({prompt: input})
+      headers: { 
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+       },
+        body: JSON.stringify({
+        prompt: input, 
+      })
     });
     
     const result = await response.json();
@@ -115,7 +199,6 @@ function App() {
     }
     
     setImage(result.image);
-    addToHistory(input, result.image)
     setIsLoading(false);
   } catch (err) {
     console.error('Fetch error:', err);
@@ -128,21 +211,64 @@ if (isLoading) {
 }
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={
-        <>
-          <Header />
-          <Image image={image} />
-          <Input onBtnSubmit={onBtnSubmit} />
-          {error && <ErrorMessage message={error} />}
-          <Footer />
-        </>
-        }
+    <>
+    
+      {successMessage && <SuccessMessage message={successMessage} />}
+      {error && <ErrorMessage message={error} />}
+
+      {/* Conditional rendering of modal to delete imnages */}
+      {confirmData && (
+        <ConfirmModal
+          message={confirmData.message}
+          onConfirm = { ()=> {confirmData.onConfirm();
+          setConfirmData(null);
+          }}
+          onCancel={ ()=> setConfirmData(null)}
         />
-        <Route path="/history" element={< History history={history} handleDelete={handleDelete} shareImage={shareImage} downloadImage={downloadImage} />} />
+      )}
+      <Routes>
+        {/* Default page when user opens website */}
+        <Route path="/" element={<Navigate to="/signin" replace/>} />
+
+        {/* Signing and register routes */}
+        <Route path="/signin" element={<Signin setUser={setUser} setError={setError} />} />
+        <Route path="/register" element={<Register setUser={setUser} setError={setError} />} />
+
+        {/* Ternary operator with condition of user state, if it's not null to show main page else redirect to signin */}
+        <Route path="/home" element={
+        user ? (
+          <>
+            <Nav user={user} fetchHistory={fetchHistory} logout={logout} />
+            <Header />
+            <Image image={image} setImage={setImage} shareImage={shareImage} downloadImage={downloadImage} />
+            <Input onBtnSubmit={onBtnSubmit} />
+            <Footer />
+          </>
+          ) : ( <Navigate to="/signin" replace/> )
+          }
+        />
+        
+        <Route path="/history" element={
+          user ? (
+            <>
+              <Nav user={user} fetchHistory={fetchHistory} logout={logout} />
+              <History history={history} handleDeleteClick={handleDeleteClick} shareImage={shareImage} downloadImage={downloadImage} />
+            </>
+         ) : ( <Navigate to="/signin" replace /> )
+         } 
+         />
+         
+         <Route path="/about" element={
+          user ? (
+            <>
+              <Nav user={user} fetchHistory={fetchHistory} logout={logout} />
+              <About />
+            </>
+          ) : ( <Navigate to="/signin" replace />)
+         }
+         />
       </Routes>
-    </Router>
+    </>
   )
 }
 

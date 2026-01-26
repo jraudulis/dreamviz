@@ -1,40 +1,19 @@
 :root {
-  --bg: #1d1e33;
-  --text: #f8f8ff;
-  --accent: #7f5af0;
-  --muted: #94a1b2;
+  --bg: #1e1f29;          /* main dark background */
+  --text: #f8f8ff;        /* main text (light for contrast) */
+  --accent: #7f5af0;      /* purple accent stays the same */
+  --muted: #a0a0b0;       /* muted text for secondary info */
+  --error: #ff6b6b;       /* optional: error color */
+  --success: #4ade80;     /* optional: success color */
 }
+
 
 body {
-  margin: 0;
-  min-height: 100vh;
+  background: #1d1e33;
+  color: #f8f8ff;
   font-family: 'Poppins', sans-serif;
-  color: #fff;
-
-  /* Dark gradient */
-  background: linear-gradient(
-    120deg,
-    #2e026d,   /* deep purple */
-    #5b1899,   /* mid purple */
-    #1a1a2e,   /* dark grey/indigo */
-    #2c2c3e    /* softer dark grey */
-  );
-  background-size: 300% 300%;
-  animation: gradientShift 20s ease infinite;
+  margin: 0;
 }
-
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 
 #root {
   min-height: 100vh;
@@ -43,24 +22,25 @@ body {
   align-items: center;
 }
 
+
 * {
   box-sizing: border-box;
 }
 
-.logo{
-  height: 80px;
-  width: auto;
+.logo {
   font-family: "Lexend Deca", sans-serif;
   font-weight: 900;
-  font-size: 3rem;
-  letter-spacing: 3px;
-  margin-top: 0;
-  color: var(--accent);
+  font-size: 2rem;
+  letter-spacing: 2px;
+  color: var(--text);
+  margin: 0;
 }
 
-.logo span {
-  font-size: 1rem;
+.logo-span {
+  color: var(--accent); 
+  font-size: 0.9em;   
 }
+
 
 h1 {
   color: var(--accent);

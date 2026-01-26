@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
+
+.wrapper {
+  width: 100%;
+  padding: 1rem 1rem;
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4rem;
+}
+
+.nav-wrapper {
+  display: flex;
+}
+
+.nav-item {
+  font-size: 1.2rem;
+  font-weight: 700;
+  border: none;
+  margin: 10px;
+  color: var(--text);      /* text color consistent with theme */
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.nav-item:hover {
+  color: #6c4fd0; /* hover accent stays purple */
+}
+
+.name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  border: none;
+  margin: 10px;
+  color: var(--text);      /* text color consistent with theme */
+  cursor: default;
+  text-decoration: none;
+}
+
+/* Burger hidden on desktop */
+.burger {
+  width: 32px;
+  height: 24px;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.burger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  margin: 5px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Animate to X */
+.burger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.burger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .nav-wrapper {
+    display: none;
+  }
+
+  .burger {
+    background-color: none;
+    display: block;
+  }
+
+  .nav-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+  }
+
+  a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  a:hover {
+    color: var(--accent);
+  }
+
+  .nav-item {
+    margin: 0;
+  }
+}

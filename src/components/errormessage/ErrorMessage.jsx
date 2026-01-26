@@ -1,6 +1,6 @@
 import './ErrorMessage.css';
 
-export default function ErrorMessage({ message }) {
+ function ErrorMessage({ message }) {
   if (!message) return null;
 
   return (
@@ -9,3 +9,5 @@ export default function ErrorMessage({ message }) {
     </div>
   );
 }
+
+export default ErrorMessage;
