@@ -1,6 +1,4 @@
 import './History.css';
-import { Link } from 'react-router-dom';
-import logo from '../../assets/logo.png';
 import { useState } from 'react';
 
 
@@ -10,14 +8,6 @@ function History({history, handleDeleteClick, shareImage, downloadImage}) {
 
     return (
       <>
-     {/* <nav className='hist-nav'>
-      <div className="logo-wrapper">
-        <h2 className="logo">
-          DreamViz<span className="logo-span">.ai</span>
-        </h2>
-      </div>
-     <Link className="home-btn" to="/home">Home</Link>
-     </nav> */}
   <div className="history-wrapper">
     <h1>Your History</h1>
     <div className="history-list">
