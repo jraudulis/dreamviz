@@ -22,8 +22,7 @@ async function handleRegister (req, res, db, bcrypt) {
         .insert({
             name,
             email,
-            hash,
-            joined: new Date()
+            hash
         })
         .returning('*');
 
