@@ -2,7 +2,7 @@ import './register.css';
 import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function Register({setUser, setError}) {
+function Register({setUser, setError, setIsLoading}) {
 
      const navigate = useNavigate();
 
@@ -24,6 +24,7 @@ function Register({setUser, setError}) {
 
     const onRegister = async () => {
         setError(null);
+        setIsLoading(true);
 
     try {
         const response = await fetch('https://dreamviz.onrender.com/register', {
@@ -40,11 +41,13 @@ function Register({setUser, setError}) {
 
         if (!response.ok) {
         setError(data);
+        setIsLoading(false);
         return;
         }
 
         setUser(data.user);
         navigate('/home');
+        setIsLoading(false);
 
     } catch (err) {
         setError('Network error. Please try again.');

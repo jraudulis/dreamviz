@@ -1,15 +1,17 @@
 :root {
-  --bg: #1e1f29;          /* main dark background */
+  --bg: #16171f;          /* main dark background */
   --text: #f8f8ff;        /* main text (light for contrast) */
-  --accent: #7f5af0;      /* purple accent stays the same */
+  --accent: #8b5cf6;    
   --muted: #a0a0b0;       /* muted text for secondary info */
-  --error: #ff6b6b;       /* optional: error color */
-  --success: #4ade80;     /* optional: success color */
+  --card-bg: #1e1f29;     /* card/panel backgrounds */
+  --border: rgba(255, 255, 255, 0.1); /* subtle borders */
+  --error: #ff6b6b;       
+  --success: #4ade80;     
 }
 
 
 body {
-  background: #1d1e33;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
   color: #f8f8ff;
   font-family: 'Poppins', sans-serif;
   margin: 0;
@@ -44,4 +46,32 @@ body {
 
 h1 {
   color: var(--accent);
+}
+
+/* Animated Background Decorations */
+.bg-decoration,
+.bg-decoration-2 {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    animation: float 20s ease-in-out infinite;
+}
+
+.bg-decoration {
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    top: -10%;
+    left: -10%;
+    animation-delay: 0s;
+}
+
+.bg-decoration-2 {
+    width: 400px;
+    height: 300px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    bottom: -10%;
+    right: -10%;
+    animation-delay: 10s;
 }

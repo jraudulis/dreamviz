@@ -2,7 +2,6 @@ import './App.css';
 import  Signin from './components/signin/Signin.jsx';
 import  Register from './components/register/Register.jsx';
 import Nav from './components/navigation/Nav.jsx';
-import About from './components/about/About.jsx';
 import Header from './components/header/Header.jsx';
 import History from './components/history/History.jsx';
 import Input from './components/input/Input.jsx';
@@ -212,6 +211,10 @@ if (isLoading) {
 
   return (
     <>
+
+      {/* Global animated background decorations */}
+      <div className="bg-decoration"></div>
+      <div className="bg-decoration-2"></div>
     
       {successMessage && <SuccessMessage message={successMessage} />}
       {error && <ErrorMessage message={error} />}
@@ -231,8 +234,8 @@ if (isLoading) {
         <Route path="/" element={<Navigate to="/signin" replace/>} />
 
         {/* Signing and register routes */}
-        <Route path="/signin" element={<Signin setUser={setUser} setError={setError} />} />
-        <Route path="/register" element={<Register setUser={setUser} setError={setError} />} />
+        <Route path="/signin" element={<Signin setUser={setUser} setError={setError} setIsLoading={setIsLoading} />} />
+        <Route path="/register" element={<Register setUser={setUser} setError={setError} setIsLoading={setIsLoading} />} />
 
         {/* Ternary operator with condition of user state, if it's not null to show main page else redirect to signin */}
         <Route path="/home" element={
@@ -256,16 +259,6 @@ if (isLoading) {
             </>
          ) : ( <Navigate to="/signin" replace /> )
          } 
-         />
-         
-         <Route path="/about" element={
-          user ? (
-            <>
-              <Nav user={user} fetchHistory={fetchHistory} logout={logout} />
-              <About />
-            </>
-          ) : ( <Navigate to="/signin" replace />)
-         }
          />
       </Routes>
     </>
