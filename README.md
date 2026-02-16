@@ -13,6 +13,6 @@ DreamViz is a full-stack web application that generates AI images from text prom
 ## Tech Stack
 - Frontend: React
 - Backend: Node.js, Express
-- Database: PostgreSQL (or whatever you use)
+- Database: PostgreSQL
 - Auth: JWT
 - AI: OpenAI API
