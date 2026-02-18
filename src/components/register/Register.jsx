@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 function Register({setUser, setError, setIsLoading}) {
 
-     const navigate = useNavigate();
+    const API_URL = import.meta.env.VITE_API_URL;
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -27,7 +28,7 @@ function Register({setUser, setError, setIsLoading}) {
         setIsLoading(true);
 
     try {
-        const response = await fetch('https://dreamviz.onrender.com/register', {
+        const response = await fetch(`${API_URL}/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -87,8 +88,7 @@ const handleSubmit = (e) => {
 
         <button type="submit" className="auth-btn">Register</button>
 
-        <p className="auth-switch">
-            Already have an account?
+        <p className="auth-switch">Already have an account?
             <a href="/signin">Sign in</a>
         </p>
         </form>

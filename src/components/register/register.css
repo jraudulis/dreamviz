@@ -16,6 +16,7 @@
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   text-align: center;
+  z-index: 1;
 }
 
 .auth-box h2 {

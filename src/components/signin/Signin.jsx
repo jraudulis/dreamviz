@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 function Signin({setUser, setError, setIsLoading}) {
 
-     const navigate = useNavigate();
+    const API_URL = import.meta.env.VITE_API_URL;
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -19,7 +20,7 @@ function Signin({setUser, setError, setIsLoading}) {
 
     const onSignin = async ()=> {
         setIsLoading(true);
-       const response = await fetch('https://dreamviz.onrender.com/signin', {
+       const response = await fetch(`${API_URL}/signin`, {
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify({

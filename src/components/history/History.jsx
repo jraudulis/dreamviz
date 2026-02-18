@@ -9,7 +9,9 @@ function History({history, handleDeleteClick, shareImage, downloadImage}) {
     return (
       <>
   <div className="history-wrapper">
-    <h1>Your History</h1>
+
+    { history.length > 0 ? <h1>Your History</h1> : <h2>No history to display</h2> }
+    
     <div className="history-list">
       {history.map((item, index) => (
         <div key={index} onClick={() => setSelectedImage(item)} className="history-card">

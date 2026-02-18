@@ -27,6 +27,7 @@ function App() {
   const [confirmData, setConfirmData] = useState(null);
 
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL;
 
   // Fetch request for user details on the page refresh
   useEffect(()=> {
@@ -35,7 +36,7 @@ function App() {
 
     const fetchMe = async () => {
       try {
-        const res = await fetch('https://dreamviz.onrender.com/me', {
+        const res = await fetch(`${API_URL}/me`, {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -81,7 +82,7 @@ useEffect(()=> {
 
     setIsLoading(true);
 
-    const res = await fetch('https://dreamviz.onrender.com/history', {
+    const res = await fetch(`${API_URL}/history`, {
       method: 'GET',
       headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
     });
@@ -109,7 +110,7 @@ useEffect(()=> {
 
     try{
 
-      const res = await fetch(`https://dreamviz.onrender.com/delete/${image.id}`,{
+      const res = await fetch(`${API_URL}/delete/${image.id}`,{
         method: 'delete',
         headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
       });
@@ -178,7 +179,7 @@ useEffect(()=> {
   setIsLoading(true);
   
   try {
-    const response = await fetch('https://dreamviz.onrender.com/generate-image', {
+    const response = await fetch(`${API_URL}/generate-image`, {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',
