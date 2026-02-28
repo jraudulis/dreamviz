@@ -16,7 +16,7 @@ import handleDelete from './controllers/delete.js';
 import handleMeRequest from './controllers/me.js';
 
 // Database connection setup
-const db = knex({
+export const db = knex({
   client: 'pg',
   connection: {
     host: process.env.DATABASE_HOST,
