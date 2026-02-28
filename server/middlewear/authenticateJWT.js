@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import knexfile from '../knexfile';
 
 const authenticateJWT = async (req, res, next) => {
     const authHeader = req.headers.authorization;
@@ -16,7 +17,7 @@ const authenticateJWT = async (req, res, next) => {
     jwt.verify(token, process.env.JWT_SECRET, async (err, payload) => {
         if(err) return res.status(403).json('invalid token');
 
-        const user = await knex('users')
+        const user = await knexfile('users')
             .where({id: payload.id})
             .first();
 
