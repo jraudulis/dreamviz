@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import knexfile from '../knexfile';
+import knexfile from '../knexfile.js';
 
 const authenticateJWT = async (req, res, next) => {
     const authHeader = req.headers.authorization;
