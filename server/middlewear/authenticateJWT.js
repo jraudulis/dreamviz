@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { db } from '../server.js';
+import { db } from '../dbConnection.js';
 
 const authenticateJWT = async (req, res, next) => {
     const authHeader = req.headers.authorization;

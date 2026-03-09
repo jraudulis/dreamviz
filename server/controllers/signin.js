@@ -46,7 +46,7 @@ async function handleSignin (req, res, db, bcrypt) {
                     token: token
                 });
             } 
-            else return res.status(400).json({error: 'wrong user or password'})
+            else return res.status(401).json({error: 'wrong user or password'})
             
     } catch(err) {
         console.error("SIGNIN ERROR:", err);
