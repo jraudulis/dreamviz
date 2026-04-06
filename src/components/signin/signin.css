@@ -280,6 +280,14 @@
 
 /* Responsive Design */
 @media (max-width: 1200px) {
+     .hero-section {
+        grid-row: 2;
+    }
+
+      .auth-section {
+        grid-row: 1;
+    }
+    
     .signin-container {
         grid-template-columns: 1fr;
         gap: 3rem;
@@ -311,6 +319,7 @@
 }
 
 @media (max-width: 640px) {
+
     .signin-page {
         padding: 1rem;
     }
