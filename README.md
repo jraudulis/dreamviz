@@ -19,11 +19,11 @@ DreamViz is a full-stack web application that lets users generate, download, and
 - AI: OpenAI API
 
 ## Running Locally
-git clone <repo>
-cd DreamViz
-npm install
-cd frontend && npm install
-npm run dev
+-git clone <repo>
+-cd DreamViz
+-npm install
+-cd frontend && npm install
+-npm run dev
 
 ## Some of the challanges and solutions
 - API usage limits: Implemented backend rate limiting per user using JWT authentication and tracking database data.
