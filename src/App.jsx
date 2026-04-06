@@ -81,21 +81,26 @@ useEffect(()=> {
   const fetchHistory = async () => {
 
     setIsLoading(true);
-
-    const res = await fetch(`${API_URL}/history`, {
+    try{
+      const res = await fetch(`${API_URL}/history`, {
       method: 'GET',
       headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
     });
 
     if (!res.ok) {
       setError('History request faield');
-      isLoading(false);
       return;
     }
 
     const data = await res.json();
     setHistory(data);
     setIsLoading(false);
+    } catch(err){
+      setError('Network error - please try again later');
+    } finally {
+      setIsLoading(false);
+    }
+    
   }
   // Function to initiate delete modal and populate state with data
   const handleDeleteClick = (image) => {

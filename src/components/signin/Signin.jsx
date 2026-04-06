@@ -20,7 +20,10 @@ function Signin({setUser, setError, setIsLoading}) {
 
     const onSignin = async ()=> {
         setIsLoading(true);
-       const response = await fetch(`${API_URL}/signin`, {
+
+    try{
+
+        const response = await fetch(`${API_URL}/signin`, {
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify({
@@ -28,9 +31,10 @@ function Signin({setUser, setError, setIsLoading}) {
                 password: password,
             })
         })
+
         const signinData = await response.json();
 
-        if(!response.ok) {
+            if(!response.ok) {
             setIsLoading(false);
             setError(signinData.error);
             return;
@@ -40,8 +44,13 @@ function Signin({setUser, setError, setIsLoading}) {
             localStorage.setItem('user', JSON.stringify(signinData.user));
             setUser(signinData.user);
             navigate('/home');
-            setIsLoading(false);
         
+        }catch(err){
+            setError('Server error - Please try later');
+        } finally {
+            setIsLoading(false);
+        }
+
     }
 
      const handleSubmit = (e) => {
