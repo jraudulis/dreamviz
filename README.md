@@ -32,7 +32,9 @@ DreamViz is a full-stack web application that lets users generate, download, and
 
 - User authentication & security: Developed secure signup/login flows with Bcrypt, JWT, protecting routes and user data from unauthorized access.
 
-- User history management: Implemented efficient storage and retrieval of user-generated images in PostgreSQL, allowing users to view, download, and share past creations.
+- Databse: Set up PostgreSQL with Knex migrations. Stores user-generated image history, enabling viewing, downloading, and sharing past creations.
+
+- Variables and sensitive data: Used .env variables for all sensitive data (API keys, JWT secret, DB credentials). Configured separate development and production environments
 
 
 
