@@ -20,7 +20,7 @@ function App() {
 
   const [history, setHistory] = useState([]);
   const [image, setImage] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [user, setUser] = useState(null);
@@ -46,7 +46,7 @@ function App() {
       if(!res.ok) {
         setIsLoading(false);
         return;
-      } 
+      }
 
       const user = await res.json();
       setUser(user);
@@ -55,6 +55,8 @@ function App() {
     } catch(err) {
       setIsLoading(false);
       console.log(err)
+    } finally {
+      setIsLoading(false);
     }
   };
 
