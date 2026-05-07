@@ -4,14 +4,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
   padding: 2rem;
 }
 
 .auth-box {
   width: 100%;
   max-width: 380px;
-  background: white;
+  background: var(--card-bg);
   padding: 2rem 2.5rem;
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
@@ -22,7 +21,7 @@
 .auth-box h2 {
   margin-bottom: 1.5rem;
   font-size: 1.7rem;
-  color: #333;
+  color: var(--text);
 }
 
 .auth-form {
@@ -41,6 +40,8 @@
   padding: 0.75rem;
   font-size: 1rem;
   border-radius: 12px;
+  background: transparent;
+  color: var(--text);
   border: 1px solid #ccc;
   outline: none;
   transition: border 0.2s ease;
@@ -82,12 +83,11 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
 .auth-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    box-shadow: 0px 1px 20px rgba(102, 126, 234, 0.6);
 }
 
 .auth-btn:active {

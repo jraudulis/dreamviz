@@ -1,0 +1,385 @@
+/* =========================
+   HERO SECTION
+========================= */
+
+header {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  padding: 2rem 1rem;
+  position: relative;
+}
+
+.header-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* hero text */
+header h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 500;
+  margin: 0;
+
+  background: linear-gradient(90deg, #fff, var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+header p {
+  font-size: 1.2rem;
+  color: var(--muted);
+  max-width: 600px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* background dots */
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(white 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  position: relative;
+  display: inline-block;
+
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+
+  border-radius: 999px;
+  text-decoration: none;
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+/* primary */
+.btn-primary {
+  background: var(--accent);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
+}
+
+/* secondary */
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--accent);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+}
+
+/* glow */
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: inherit;
+  background: var(--accent);
+  filter: blur(14px);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.btn:hover::after {
+  opacity: 0.35;
+}
+
+
+/* =========================
+   SIGN IN LINK
+========================= */
+
+.signin-link {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.signin-link a {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.signin-link a:hover {
+  color: var(--accent);
+}
+
+
+/* =========================
+   HOW IT WORKS
+========================= */
+
+#how-it-works {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto 100px;
+  padding: 0 1rem;
+
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2rem;
+  text-align: center;
+  color: var(--text);
+  margin-bottom: 40px;
+  font-weight: 500;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  padding: 24px;
+  text-align: left;
+
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(139, 92, 246, 0.5);
+}
+
+.step {
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  margin: 0 0 10px;
+  color: var(--text);
+  font-size: 1.2rem;
+}
+
+.card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+
+/* =========================
+   GALLERY
+========================= */
+
+#gallery {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 120px 1rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.dream-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+
+  transition: all 0.25s ease;
+}
+
+.dream-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+.dream-card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+.dream-content {
+  padding: 20px;
+}
+
+.dream-content h3 {
+  margin: 0 0 10px;
+}
+
+.dream-content p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+
+/* =========================
+   FEATURES
+========================= */
+
+#features {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 120px 1rem;
+  text-align: center;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.feature-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+
+  padding: 32px 24px;
+  transition: all 0.25s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+.feature-card h3 {
+  margin: 0 0 12px;
+  color: var(--text);
+}
+
+.feature-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+
+/* =========================
+   CTA
+========================= */
+
+#cta {
+  width: 100%;
+  padding: 120px 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.cta-box {
+  max-width: 800px;
+  width: 100%;
+
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+
+  padding: 60px 40px;
+  text-align: center;
+
+  backdrop-filter: blur(10px);
+}
+
+.cta-box h2 {
+  font-size: 2.2rem;
+  font-weight: 500;
+  margin: 0 0 16px;
+  color: var(--text);
+}
+
+.cta-box p {
+  color: var(--muted);
+  margin: 0 0 32px;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+.cta-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card {
+    text-align: center;
+  }
+}
+
+@media (max-width: 700px) {
+  .gallery-grid,
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}

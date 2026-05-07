@@ -1,9 +1,10 @@
 :root {
-  --bg: #16171f;          /* main dark background */
+  --bg: #080912;          /* main dark background */
   --text: #f8f8ff;        /* main text (light for contrast) */
   --accent: #8b5cf6;    
   --muted: #a0a0b0;       /* muted text for secondary info */
   --card-bg: #1e1f29;     /* card/panel backgrounds */
+  --button-bg: #15182d;
   --border: rgba(255, 255, 255, 0.1); /* subtle borders */
   --error: #ff6b6b;       
   --success: #4ade80;     
@@ -11,7 +12,7 @@
 
 
 body {
-  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  background: linear-gradient(135deg, #04030a 0%, #090819 50%, #101021 100%);
   color: #f8f8ff;
   font-family: 'Poppins', sans-serif;
   margin: 0;
@@ -45,7 +46,10 @@ body {
 
 
 h1 {
-  color: var(--accent);
+  font-size: 3.2em;
+  line-height: 1.1;
+  margin: 1rem;
+  font-weight: 500
 }
 
 /* Animated Background Decorations */
@@ -74,4 +78,38 @@ h1 {
     bottom: -10%;
     right: -10%;
     animation-delay: 10s;
+}
+
+/* Button animation */
+.glare-btn {
+  position: relative;
+  overflow: hidden;
+  padding: 12px 24px;
+  background: #111;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* glare layer */
+.glow-btn {
+  position: relative;
+  z-index: 1;
+}
+
+.glow-btn::after {
+  content: "";
+  position: absolute;
+  inset: -5px; /* spreads glow outside */
+  border-radius: inherit;
+  background: rgba(126, 57, 117, 0.7);
+  filter: blur(20px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.glow-btn:hover::after {
+  opacity: 1;
 }

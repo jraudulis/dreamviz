@@ -15,12 +15,13 @@ function Input({onBtnSubmit}) {
   }
     return (
     <div className="input-wrapper container">
+      <h1>What did you dream?</h1>
       <form onSubmit={handleSubmit}>
         <textarea value={input} onChange={onInputChange}
           className="dream-textarea"
           placeholder="Describe your dream..."
         />
-        <button type="submit" className="generate-button">
+        <button type="submit" className="generate-button btn btn-secondary">
           Visualize Dream
         </button>
       </form>

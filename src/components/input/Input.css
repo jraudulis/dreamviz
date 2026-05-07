@@ -1,4 +1,7 @@
 .input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   flex: 1;
   margin: 2rem 0;
   text-align: center;
@@ -26,16 +29,22 @@ textarea:focus, input:focus {
 button {
   padding: 0.75rem 2rem;
   font-size: 1rem;
-  font-weight: 700;
-  border: none;
+  font-weight: 500;
+  border: 1px solid var(--border);
   border-radius: 999px;
-  background-color: var(--accent); /* purple accent from signin */
+  background: transparent;
   color: white;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 button:hover {
-  background-color: #6c4fd0; /* hover color stays as purple */
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+
+button:active {
+  transform: translateY(0);
 }
 

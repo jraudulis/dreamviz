@@ -1,6 +1,7 @@
 import './register.css';
 import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function Register({setUser, setError, setIsLoading}) {
 
@@ -89,8 +90,9 @@ const handleSubmit = (e) => {
         <button type="submit" className="auth-btn">Register</button>
 
         <p className="auth-switch">Already have an account?
-            <a href="/signin">Sign in</a>
+            <Link to="/signin">Sign in</Link>
         </p>
+        <p className="auth-switch">Main page <Link to="/">Go back</Link></p>
         </form>
     </div>
     </div>

@@ -2,7 +2,7 @@ import './App.css';
 import  Signin from './components/signin/Signin.jsx';
 import  Register from './components/register/Register.jsx';
 import Nav from './components/navigation/Nav.jsx';
-import Header from './components/header/Header.jsx';
+import LandingPage from './components/landingPage/LandingPage.jsx';
 import History from './components/history/History.jsx';
 import Input from './components/input/Input.jsx';
 import Loader from './components/loader/Loader.jsx';
@@ -133,7 +133,7 @@ useEffect(()=> {
   const logout = () => {
     localStorage.removeItem('token');
     setUser(null);
-    navigate('/signin');
+    navigate("/landing-page");
   }
 // Function to convert base64 data in to file
   const base64ToFile = (image) => {
@@ -237,7 +237,7 @@ if (isLoading) {
       )}
       <Routes>
         {/* Default page when user opens website */}
-        <Route path="/" element={<Navigate to="/signin" replace/>} />
+        <Route path="/" element={<LandingPage />} />
 
         {/* Signing and register routes */}
         <Route path="/signin" element={<Signin setUser={setUser} setError={setError} setIsLoading={setIsLoading} />} />
@@ -248,12 +248,11 @@ if (isLoading) {
         user ? (
           <>
             <Nav user={user} fetchHistory={fetchHistory} logout={logout} />
-            <Header />
             <Image image={image} setImage={setImage} shareImage={shareImage} downloadImage={downloadImage} />
             <Input onBtnSubmit={onBtnSubmit} />
             <Footer />
           </>
-          ) : ( <Navigate to="/signin" replace/> )
+          ) : ( <Navigate to="/" replace/> )
           }
         />
         
@@ -263,7 +262,7 @@ if (isLoading) {
               <Nav user={user} fetchHistory={fetchHistory} logout={logout} />
               <History history={history} handleDeleteClick={handleDeleteClick} shareImage={shareImage} downloadImage={downloadImage} />
             </>
-         ) : ( <Navigate to="/signin" replace /> )
+         ) : ( <Navigate to="/" replace /> )
          } 
          />
       </Routes>

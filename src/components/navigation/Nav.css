@@ -19,7 +19,7 @@ nav {
 
 .nav-item {
   font-size: 1.2rem;
-  font-weight: 700;
+
   border: none;
   margin: 10px;
   color: var(--text);      /* text color consistent with theme */
@@ -98,13 +98,13 @@ nav {
     backdrop-filter: blur(10px);
   }
 
-  a {
+  .nav-item {
     color: var(--text);
     text-decoration: none;
     font-weight: 700;
   }
 
-  a:hover {
+  .nav-item:hover {
     color: var(--accent);
   }
 
