@@ -9,14 +9,16 @@ function Nav({user, fetchHistory, logout}) {
     return (
       <div className='wrapper'>
       <nav>
-        <div className="logo-wrapper">
-          <h2 className="logo">
-            DreamViz<span className="logo-span">.ai</span>
-          </h2>
+        <div className="logo">
+          <span className="logo-icon">✦</span>
+          <span className="logo-text">
+            DreamViz
+          </span>
         </div>
         <div className="nav-wrapper">
-          <div className='name'>Hello, {user.name}</div>
+          <div className='name'>Welcome back, {user.name}</div>
           <Link className="nav-item" to="/home">Home</Link>
+          <Link className="nav-item" to="/home">Gallery</Link>
           <Link onClick={fetchHistory} className="nav-item" to="/History">History</Link>
           <Link onClick={logout} className='nav-item'>Log out</Link>
         </div>

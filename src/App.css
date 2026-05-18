@@ -30,20 +30,6 @@ body {
   box-sizing: border-box;
 }
 
-.logo {
-  font-family: "Lexend Deca", sans-serif;
-  font-weight: 900;
-  font-size: 2rem;
-  letter-spacing: 2px;
-  color: var(--text);
-  margin: 0;
-}
-
-.logo-span {
-  color: var(--accent); 
-  font-size: 0.9em;   
-}
-
 
 h1 {
   font-size: 3.2em;
