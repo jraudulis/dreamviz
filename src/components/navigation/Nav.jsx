@@ -18,7 +18,7 @@ function Nav({user, fetchHistory, logout}) {
         <div className="nav-wrapper">
           <div className='name'>Welcome back, {user.name}</div>
           <Link className="nav-item" to="/home">Home</Link>
-          <Link className="nav-item" to="/home">Gallery</Link>
+          <Link className="nav-item" to="/gallery">Gallery</Link>
           <Link onClick={fetchHistory} className="nav-item" to="/History">History</Link>
           <Link onClick={logout} className='nav-item'>Log out</Link>
         </div>
@@ -39,6 +39,7 @@ function Nav({user, fetchHistory, logout}) {
       {menuOpen && (
         <nav className="nav-mobile">
           <Link onClick={() => setMenuOpen(false)} className='nav-item' to="/home">Home</Link>
+          <Link onClick={() => setMenuOpen(false)} className='nav-item' to="/gallery">Gallery</Link>
           <Link onClick={() => {setMenuOpen(false), fetchHistory()} } className="nav-item" to="/History">History</Link>
           <Link onClick={logout} className='nav-item'>Log out</Link>
         </nav>

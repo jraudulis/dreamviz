@@ -4,6 +4,7 @@ import  Register from './components/register/Register.jsx';
 import Nav from './components/navigation/Nav.jsx';
 import LandingPage from './components/landingPage/LandingPage.jsx';
 import History from './components/history/History.jsx';
+import Gallery from './components/gallery/Gallery.jsx';
 import Input from './components/input/Input.jsx';
 import Loader from './components/loader/Loader.jsx';
 import Image from './components/image/Image.jsx';
@@ -263,6 +264,16 @@ if (isLoading) {
             <>
               <Nav user={user} fetchHistory={fetchHistory} logout={logout} />
               <History history={history} handleDeleteClick={handleDeleteClick} shareImage={shareImage} downloadImage={downloadImage} />
+            </>
+         ) : ( <Navigate to="/" replace /> )
+         } 
+         />
+
+         <Route path="/gallery" element={
+          user ? (
+            <>
+              <Nav user={user} fetchHistory={fetchHistory} logout={logout} />
+              <Gallery  />
             </>
          ) : ( <Navigate to="/" replace /> )
          } 

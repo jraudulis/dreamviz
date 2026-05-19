@@ -6,9 +6,9 @@ if (!image) return null;
     <div className="overlay">
     <img src={image} alt='your image' />
     <div className="btn-wrapper">
-    <button onClick={() => downloadImage(image)}>Download</button>
-    <button onClick={() => shareImage(image)}>Share</button>
-    <button onClick={() => setImage(null)}>Close</button>
+    <button className='btn btn-secondary glow-btn' onClick={() => downloadImage(image)}>Download</button>
+    <button className='btn btn-secondary' onClick={() => shareImage(image)}>Share</button>
+    <button className='btn btn-secondary' onClick={() => setImage(null)}>Close</button>
     </div>
   </div>
 

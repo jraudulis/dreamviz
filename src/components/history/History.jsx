@@ -27,10 +27,10 @@ function History({history, handleDeleteClick, shareImage, downloadImage}) {
     <img src={selectedImage.image} alt={selectedImage.input} />
     <p>{selectedImage.input}</p>
     <div className="btn-wrapper">
-    <button onClick={() => downloadImage(selectedImage.image)}>Download</button>
-    <button onClick={() => shareImage(selectedImage.image)}>Share</button>
-    {<button onClick={() =>handleDeleteClick(selectedImage, setSelectedImage(null) )}>Delete</button>}
-    <button onClick={() => setSelectedImage(null)}>Close</button>
+    <button className='btn btn-secondary glow-btn' onClick={() => downloadImage(selectedImage.image)}>Download</button>
+    <button className='btn btn-secondary glow-btn' onClick={() => shareImage(selectedImage.image)}>Share</button>
+    {<button className='btn btn-secondary glow-btn' onClick={() =>handleDeleteClick(selectedImage, setSelectedImage(null) )}>Delete</button>}
+    <button className='btn btn-secondary glow-btn' onClick={() => setSelectedImage(null)}>Close</button>
     </div>
   </div>
 )}

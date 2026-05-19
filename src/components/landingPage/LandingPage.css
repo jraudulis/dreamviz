@@ -161,7 +161,7 @@ header::before {
   font-size: 2rem;
   text-align: center;
   color: var(--text);
-  margin-bottom: 40px;
+  margin: 110px auto 40px;
   font-weight: 500;
 }
 
