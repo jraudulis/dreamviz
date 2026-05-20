@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 const SECRET_KEY = process.env.JWT_SECRET;
 
-if (!SECRET_KEY) throw new Error ('JWT token is not defined')
+if (!SECRET_KEY) throw new Error ('JWT token is not defined');
 
 async function handleSignin (req, res, db, bcrypt) {
 

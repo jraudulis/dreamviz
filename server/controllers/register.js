@@ -1,39 +1,61 @@
+import jwt from 'jsonwebtoken';
+
+const SECRET_KEY = process.env.JWT_SECRET;
+
+if (!SECRET_KEY) throw new Error ('JWT token is not defined');
+
 async function handleRegister (req, res, db, bcrypt) {
 
  const { name, email, password } = req.body;
  const saltRounds = 10;
- const hash = bcrypt.hashSync(password, saltRounds);
 
  if(!name || !email || !password) {
-        return res.status(400).json('Fill in all the registration fields');
+        return res.status(400).json({ error: 'Fill in all the registration fields'});
     }
      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
      if(!emailPattern.test(email)) {
-        return res.status(400).json('Invalid email format');
+        return res.status(400).json({ error: 'Invalid email format'});
     }
 
     if(password.length < 6) {
-        return res.status(400).json('password needs to be at least 6 characters')
+        return res.status(400).json({ error: 'password needs to be at least 6 characters'})
     }
+
+    const hash = bcrypt.hashSync(password, saltRounds);
 
  try {
 
-    const newUser = await db('users')
-        .insert({
-            name,
-            email,
-            hash
-        })
-        .returning('*');
+    const userData = await db('users').where('email', '=', email);
+
+    if(userData.length) {
+        return res.status(409).json({ error: 'email already exists' });
+    }
+
+    const result = await db.transaction(async (trx)=> {
+       const newUser = await trx('users')
+       .insert({name, email, hash})
+       .returning('*')
+        
+        
+        const token = jwt.sign(
+                { id: newUser[0].id},
+                SECRET_KEY,
+                { expiresIn: '1h'}
+            );
+
+          return {newUser, token};
+
+    });
 
         return res.json({
             message: 'Registration sucesful',
-            user: newUser[0]
-        })
+            user: result.newUser[0],
+            token: result.token
+        });
 
  }catch(err) {
     console.error("REGISTER ERROR:", err);
-    return res.status(500).json('server error');
+    return res.status(500).json({ error: 'server error'});
  } 
  
 };

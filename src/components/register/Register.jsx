@@ -39,15 +39,18 @@ function Register({setUser, setError, setIsLoading}) {
         })
         });
 
-        const data = await response.json();
+        const registerData = await response.json();
 
         if (!response.ok) {
-        setError(data);
+        setError(registerData.error);
         setIsLoading(false);
         return;
         }
 
-        setUser(data.user);
+        localStorage.setItem('token', registerData.token);
+        localStorage.setItem('user', JSON.stringify(registerData.user));
+
+        setUser(registerData.user);
         navigate('/home');
         setIsLoading(false);
 
