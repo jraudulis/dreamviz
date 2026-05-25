@@ -44,7 +44,7 @@ DreamViz is a full-stack web application that lets users generate, download, and
    cd .. && npm run dev
 
 5. Run backend
-   cd server && npm run dev
+   cd /dream visualizer/server && node server.js
 
 ## Some of the challanges and solutions
 - API usage limits: Implemented backend rate limiting per user using JWT authentication and tracking database data.
