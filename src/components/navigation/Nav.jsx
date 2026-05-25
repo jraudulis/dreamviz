@@ -36,14 +36,14 @@ function Nav({user, fetchHistory, logout}) {
       </nav>
 
       {/* Mobile menu */}
-      {menuOpen && (
-        <nav className="nav-mobile">
+      
+        <nav className={`nav-mobile ${menuOpen ? 'open' : ''}`}>
           <Link onClick={() => setMenuOpen(false)} className='nav-item' to="/home">Home</Link>
           <Link onClick={() => setMenuOpen(false)} className='nav-item' to="/gallery">Gallery</Link>
           <Link onClick={() => {setMenuOpen(false), fetchHistory()} } className="nav-item" to="/History">History</Link>
           <Link onClick={logout} className='nav-item'>Log out</Link>
         </nav>
-      )}
+      
 
     </div>
     )

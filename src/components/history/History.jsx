@@ -15,8 +15,13 @@ function History({history, handleDeleteClick, shareImage, downloadImage}) {
     <div className="history-list">
       {history.map((item, index) => (
         <div key={index} onClick={() => setSelectedImage(item)} className="history-card">
-          <img src={item.image} alt={item.prompt} className="history-image" />
-          <p className="history-prompt">{item.prompt}</p>
+          <div className="image-wrapper">
+            <img src={item.image} alt={item.prompt} className="history-image" />
+          </div>
+          
+          <div className="card prompt-wrapper">
+            <p className="history-prompt">{item.prompt}</p>
+          </div>
         </div>
       ))}
   </div>

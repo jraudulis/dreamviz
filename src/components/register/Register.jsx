@@ -10,6 +10,7 @@ function Register({setUser, setError, setIsLoading}) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [name, setName] = useState('');
 
     function onEmailChange(event) {
@@ -18,6 +19,10 @@ function Register({setUser, setError, setIsLoading}) {
 
     function onPasswordChange(event) {
         setPassword(event.target.value);
+    };
+
+    function onConfirmPasswordChange(event) {
+        setConfirmPassword(event.target.value);
     };
 
     function onNameChange(event) {
@@ -35,7 +40,8 @@ function Register({setUser, setError, setIsLoading}) {
         body: JSON.stringify({
             name,
             email,
-            password
+            password,
+            confirmPassword
         })
         });
 
@@ -43,7 +49,6 @@ function Register({setUser, setError, setIsLoading}) {
 
         if (!response.ok) {
         setError(registerData.error);
-        setIsLoading(false);
         return;
         }
 
@@ -52,20 +57,32 @@ function Register({setUser, setError, setIsLoading}) {
 
         setUser(registerData.user);
         navigate('/home');
-        setIsLoading(false);
 
     } catch (err) {
         setError('Network error. Please try again.');
+    } finally {
+        setIsLoading(false);
     }
     };
 
 const handleSubmit = (e) => {
     e.preventDefault();
 
-    // if (!email || !password || !name) {
-    //     setError('Fill in all the registration fields');
-    //     return;
-    // }
+    if(!name || !email || !password || !confirmPassword) {
+        return setError('Fill in all the registration fields');
+    }
+     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+     if(!emailPattern.test(email)) {
+        return setError('Invalid email format');
+    }
+
+    if(password.length < 6) {
+        return setError('password needs to be at least 6 characters');
+    }
+
+    if(password != confirmPassword) {
+        return setError('Passwords dont match');
+    }
 
     onRegister();
 };
@@ -88,7 +105,7 @@ const handleSubmit = (e) => {
         <input type="password" placeholder="Enter your password" onChange={onPasswordChange} />
         
         <label>Reenter Password</label>
-        <input type="password" placeholder="Enter your password" onChange={onPasswordChange} />
+        <input type="password" placeholder="Enter your password" onChange={onConfirmPasswordChange} />
 
         <button type="submit" className="auth-btn">Register</button>
 

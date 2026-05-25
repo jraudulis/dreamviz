@@ -6,10 +6,10 @@ if (!SECRET_KEY) throw new Error ('JWT token is not defined');
 
 async function handleRegister (req, res, db, bcrypt) {
 
- const { name, email, password } = req.body;
+ const { name, email, password, confirmPassword } = req.body;
  const saltRounds = 10;
 
- if(!name || !email || !password) {
+ if(!name || !email || !password || !confirmPassword) {
         return res.status(400).json({ error: 'Fill in all the registration fields'});
     }
      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -19,6 +19,10 @@ async function handleRegister (req, res, db, bcrypt) {
 
     if(password.length < 6) {
         return res.status(400).json({ error: 'password needs to be at least 6 characters'})
+    }
+
+    if(password != confirmPassword) {
+        return res.status(400).json({ error: 'Passwords dont match'});
     }
 
     const hash = bcrypt.hashSync(password, saltRounds);
