@@ -1,5 +1,11 @@
 # DreamViz
 
+ [Live Demo](https://dreamviz.netlify.app)
+
+ ![DreamViz Screenshot](./src/assets/images/screenshot.png)
+ ![DreamViz Screenshot](./src/assets/images/screenshot2.png)
+ ![DreamViz Screenshot](./src/assets/images/screenshot3.png)
+
 DreamViz is a full-stack web application that lets users generate, download, and share AI images from text prompts. Built with React, Node.js, Express, and PostgreSQL, DreamViz demonstrates secure authentication, usage tracking, and AI integration using the OpenAI API.
 
 ## Features
@@ -19,11 +25,26 @@ DreamViz is a full-stack web application that lets users generate, download, and
 - AI: OpenAI API
 
 ## Running Locally
--git clone <repo>
--cd DreamViz
--npm install
--cd frontend && npm install
--npm run dev
+
+1. Clone the repo and install frontend dependencies
+   git clone https://github.com/jraudulis/dreamviz
+   cd dreamviz
+   npm install
+
+2. Install backend dependencies
+   cd server
+   npm install
+
+3. Create a .env file in /server with:
+   DATABASE_URL=
+   JWT_SECRET=
+   OPENAI_API_KEY=
+
+4. Run frontend
+   cd .. && npm run dev
+
+5. Run backend
+   cd server && npm run dev
 
 ## Some of the challanges and solutions
 - API usage limits: Implemented backend rate limiting per user using JWT authentication and tracking database data.
